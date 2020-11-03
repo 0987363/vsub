@@ -20,6 +20,13 @@ func importShareValidate(c *gin.Context) ([]string, error) {
 	if err != nil {
 		return nil, models.Error("Unable to get request data.")
 	}
+	if string(data[:4]) == "http" {
+		data, err = models.LoadShareFromRemote(string(data))
+		if err != nil {
+			return nil, err
+		}
+	}
+
 	vs, err := base64.StdEncoding.DecodeString(string(data))
 	if err != nil {
 		return nil, err
@@ -72,6 +79,7 @@ func ImportShare(c *gin.Context) {
 			c.AbortWithStatus(http.StatusInternalServerError)
 			return
 		}
+		logger.Infof("Import node %+v: ", v)
 	}
 
 	c.Status(http.StatusAccepted)

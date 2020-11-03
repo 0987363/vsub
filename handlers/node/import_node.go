@@ -57,6 +57,7 @@ func ImportNode(c *gin.Context) {
 		c.AbortWithStatus(http.StatusInternalServerError)
 		return
 	}
+	logger.Infof("Import node %+v: ", v)
 
 	c.JSON(http.StatusCreated, &node)
 }
