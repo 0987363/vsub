@@ -10,11 +10,12 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-var RootMux = gin.New()
+var RootMux *gin.Engine
 
 func init() {
 	gin.SetMode(gin.ReleaseMode)
 
+	RootMux = gin.New()
 	RootMux.Use(middleware.Logger())
 	RootMux.Use(middleware.Recoverer())
 	RootMux.Use(middleware.DBConnector())
