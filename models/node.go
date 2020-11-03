@@ -1,6 +1,9 @@
 package models
 
 import (
+	"encoding/base64"
+	"encoding/json"
+
 	"github.com/0987363/mgo"
 	"github.com/0987363/mgo/bson"
 )
@@ -25,6 +28,19 @@ type Node struct {
 	Class  string        `json:"class" bson:"class"` // v2ray, ss, ssr
 
 	V2ray *NodeV2ray `json:"v2ray,omitempty" bson:"v2ray,omitempty"`
+}
+
+func DecodeV2ray(data string) (*NodeV2ray, error) {
+	j, err := base64.StdEncoding.DecodeString(data)
+	if err != nil {
+		return nil, err
+	}
+	v := NodeV2ray{}
+	if err := json.Unmarshal(j, &v); err != nil {
+		return nil, err
+	}
+
+	return &v, nil
 }
 
 func (node *Node) Create(db *mgo.Session) error {

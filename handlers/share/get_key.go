@@ -56,5 +56,5 @@ func GetKey(c *gin.Context) {
 	}
 	buf.Flush()
 
-	c.JSON(http.StatusOK, base64.StdEncoding.EncodeToString(b.Bytes()))
+	c.String(http.StatusOK, base64.StdEncoding.EncodeToString(b.Bytes()))
 }

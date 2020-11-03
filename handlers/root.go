@@ -41,6 +41,8 @@ func init() {
 		nodeMux := v1Mux.Group("/node")
 		{
 			nodeMux.POST("/v2ray", node.CreateV2ray)
+			nodeMux.POST("/node", node.ImportNode)
+			nodeMux.POST("/share", node.ImportShare)
 
 			nodeMux.PUT("/v2ray/:id", node.Update)
 
