@@ -82,5 +82,5 @@ func ImportShare(c *gin.Context) {
 		logger.Infof("Import node %+v: ", v)
 	}
 
-	c.Status(http.StatusAccepted)
+	c.Status(http.StatusCreated)
 }
