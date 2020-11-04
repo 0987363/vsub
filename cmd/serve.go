@@ -31,11 +31,13 @@ func init() {
 }
 
 func serve(cmd *cobra.Command, args []string) {
-	middleware.ConnectSession(viper.GetString("authentication.cookie_key"))
+	middleware.ConnectSession(viper.GetString("authentication.cookie"))
+	log.Infof("Init session:%s success.", viper.GetString("authentication.cookie"))
 
 	if err := middleware.ConnectDB(viper.GetString("database.mongodb")); err != nil {
-		log.Fatalln("connect to db failed: ", err)
+		log.Fatalf("connect to db failed: %s, err:%v", viper.GetString("database.mongodb"), err)
 	}
+	log.Infof("Connect to mongo:%s success.", viper.GetString("database.mongodb"))
 
 	handlers.RootMux.Run(viper.GetString("address"))
 }

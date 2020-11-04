@@ -38,9 +38,9 @@ func LoadConfiguration(cmd *cobra.Command, args []string) {
 
 	if err := viper.ReadInConfig(); err != nil {
 		if viper.ConfigFileUsed() == "" {
-			log.Fatalf("Unable to find configuration file.")
+			log.Errorf("Unable to find configuration file.")
 		}
-		log.Fatalf("Failed to load %s: %v", viper.ConfigFileUsed(), err)
+		log.Errorf("Failed to load %s: %v", viper.ConfigFileUsed(), err)
 	} else {
 		log.Infof("Using config file: %s", viper.ConfigFileUsed())
 	}
