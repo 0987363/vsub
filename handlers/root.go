@@ -45,7 +45,7 @@ func init() {
 			nodeMux.POST("/node", node.ImportNode)
 			nodeMux.POST("/share", node.ImportShare)
 
-			nodeMux.PUT("/v2ray/:id", node.Update)
+			nodeMux.PUT("/v2ray/:id", node.UpdateV2ray)
 
 			nodeMux.DELETE("/id/:id", node.Delete)
 
