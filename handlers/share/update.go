@@ -37,6 +37,7 @@ func Update(c *gin.Context) {
 	}
 
 	if len(share.NodeID) > 0 {
+		logger.Info("Start check node id:", share.NodeID)
 		res, err := models.ListNodeByFilter(db, bson.M{
 			"_id":     bson.M{"$in": share.NodeID},
 			"user_id": bson.ObjectIdHex(middleware.GetUserID(c)),

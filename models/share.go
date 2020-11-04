@@ -26,7 +26,13 @@ func (share *Share) Create(db *mgo.Session) error {
 func (share *Share) Update(db *mgo.Session) error {
 	c := db.DB(VSub).C(ShareCollection)
 
-	if err := c.Update(bson.M{"_id": share.ID, "user_id": share.UserID}, bson.M{"$set": share}); err != nil {
+	if err := c.Update(bson.M{
+		"_id":     share.ID,
+		"user_id": share.UserID,
+	}, bson.M{"$set": bson.M{
+		"name":    share.Name,
+		"node_id": share.NodeID,
+	}}); err != nil {
 		return err
 	}
 
